@@ -13,12 +13,13 @@ $(document).ready(function(){
 
   // When a new game starts, reset all variables
     function newGame() {
+      //reset input field
+      $("#userGuess").val("");
       //reset counter
       count = 0;
-      $("#count").text("");
+      $("#count").html("");
       //reset guesslist
-      $userGuess.text("");
-      $("#guessList").text("");
+      $("#guessList").html("");
       //reset randomNum
       randomNum = getRandomInt(1, 101);
     }
@@ -46,7 +47,7 @@ $(document).ready(function(){
       $("#count").text(count);
 
       // Ensure that users provide valid inputs. You will need to write code that ensures that the user has  supplied a numeric input between 1 and 100.
-      $userGuess < 1 || $userGuess > 100 ? prompt("Please submit a number between 1 and 100") : $userGuess = Number($("#userGuess").val());
+      $userGuess < 1 || $userGuess > 100 ? alert("Please submit a number between 1 and 100") : $userGuess = Number($("#userGuess").val());
 
       // supply users with a list of the numbers they have guessed so far. 
       $("#guessList").append("<li>" + $userGuess + "</li>");
@@ -64,6 +65,9 @@ $(document).ready(function(){
         else if (diff >= 10 && diff < 20) return "hot";
         else return "very hot";
       };
+
+      //reset input field
+      $("#userGuess").val("");
 
     });/* end Guess Button click */
 
