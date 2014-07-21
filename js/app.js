@@ -42,19 +42,27 @@ $(document).ready(function(){
     $("#guessButton").click(function(e){
       e.preventDefault();
 
-      // The game should track how many guesses the user has made. Feedback about this should appear in span#count.
-      count++;
-      $("#count").text(count);
-
-      // Ensure that users provide valid inputs. You will need to write code that ensures that the user has  supplied a numeric input between 1 and 100.
-      $userGuess < 1 || $userGuess > 100 ? alert("Please submit a number between 1 and 100") : $userGuess = Number($("#userGuess").val());
-
-      // supply users with a list of the numbers they have guessed so far. 
-      $("#guessList").append("<li>" + $userGuess + "</li>");
-
-      // Feedback about the guess should appear in div#feedback. 
-      $("#feedback").text(feedback);
-
+      // Place user input into variable $userGuess
+      $userGuess = parseInt($("#userGuess").val());
+      
+      //if not a Number print error
+      if (isNaN($userGuess)) {
+        alert("This is not a valid number. Please try again.");
+      } 
+      //if not between 1 and 100 print error
+      else if($userGuess < 1 || $userGuess > 100) {
+        alert("You can only input a number between 1 and 100. Please try again.");
+      }
+      else {
+        // supply users with a list of the numbers they have guessed so far. 
+        $("#guessList").append("<li>" + $userGuess + "</li>");
+        // The game should track how many guesses the user has made. Feedback about this should appear in span#count.
+        count++;
+        $("#count").text(count);
+        // Feedback about the guess should appear in div#feedback. 
+        $("#feedback").text(feedback);
+      }
+      
       // The user should get feedback about each guess – if it was too low, too high, or just right.
       function feedback() {
         var diff = Math.abs($userGuess - randomNum);
@@ -67,7 +75,7 @@ $(document).ready(function(){
       };
 
       //reset input field
-      $("#userGuess").val("");
+      document.getElementById("form").reset();
 
     });/* end Guess Button click */
 
