@@ -34,6 +34,12 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
+  /*--- Hide alert window box ---*/
+    $("a.ok-button").click(function(){
+      $("#alert-overlay").fadeOut(1000, function() {
+        $("#alert-message-body").text("");
+      });
+    });
   /*--- Click New Game Button ---*/
     $(".new").on("click", newGame);
 
@@ -47,11 +53,13 @@ $(document).ready(function(){
       
       //if not a Number print error
       if (isNaN($userGuess)) {
-        alert("This is not a valid number. Please try again.");
+        $("#alert-message-body").text("This is not a valid number. Please try again."); 
+        $("#alert-overlay").fadeIn(1000);
       } 
       //if not between 1 and 100 print error
       else if($userGuess < 1 || $userGuess > 100) {
-        alert("You can only input a number between 1 and 100. Please try again.");
+        $("#alert-message-body").text("You can only input a number between 1 and 100. Please try again."); 
+        $("#alert-overlay").fadeIn(1000);
       }
       else {
         // supply users with a list of the numbers they have guessed so far. 
