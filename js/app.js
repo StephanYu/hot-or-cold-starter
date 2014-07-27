@@ -5,6 +5,7 @@ $(document).ready(function(){
     var count = 0;
     var $userGuess;
     var randomNum = getRandomInt(1, 101);
+    var controlArray = [];
 
   // When a new game starts, a secret number between 1 and 100 should be generated that the user will have to guess. Returns a  random integer between min (included) and max (excluded).
     function getRandomInt(min, max) {
@@ -22,6 +23,8 @@ $(document).ready(function(){
       $("#guessList").html("");
       //reset randomNum
       randomNum = getRandomInt(1, 101);
+      //reset controlArray
+      controlArray = [];
     }
 
 	/*--- Display information modal box ---*/
@@ -61,9 +64,16 @@ $(document).ready(function(){
         $("#alert-message-body").text("You can only input a number between 1 and 100. Please try again."); 
         $("#alert-overlay").fadeIn(1000);
       }
+      //if number has been picked previously during the current game alert user
+      else if(controlArray.indexOf($userGuess) >= 0) {
+        $("#alert-message-body").text("You have already picked that number before. Please try again."); 
+        $("#alert-overlay").fadeIn(1000);
+      }
       else {
         // supply users with a list of the numbers they have guessed so far. 
         $("#guessList").append("<li>" + $userGuess + "</li>");
+        // push $userGuess into controlArray
+        controlArray.push($userGuess);
         // The game should track how many guesses the user has made. Feedback about this should appear in span#count.
         count++;
         $("#count").text(count);
