@@ -89,7 +89,8 @@ $(document).ready(function(){
         else if (diff >= 30 && diff < 50) return "cold";
         else if (diff >= 20 && diff < 30) return "warm";
         else if (diff >= 10 && diff < 20) return "hot";
-        else return "very hot";
+        else if (diff >= 1 && diff < 10)  return "very hot";
+        else return "Congratulations. You won!"
       };
 
       //reset input field
